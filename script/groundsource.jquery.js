@@ -9,9 +9,33 @@
     var GroundSource = function (jq_element, jq_args) {
 
         var groundsource = this;
+        this.args = jq_args;
 
         this.init = function () {
-            alert('init!');
+            if (groundsource.args.hasOwnProperty('settings')) {
+                groundsource.main.mergeSettings(groundsource.args.settings);
+            }
+        };
+
+        this.main = {
+            settings : {
+                api_base_url    : '',   //defaults, can be overridden on init()
+                token           : '',
+                sandbox_mode    : true,
+            },
+            mergeSettings : function (settings) {
+                var prop;
+                for (prop in settings) {
+                    if (settings.hasOwnProperty(prop)
+                            && groundsource.main.settings.hasOwnProperty(prop)) {
+                        groundsource.main.settings[prop] = settings[prop];
+                    }
+                }
+            },
+        };
+
+        this.api = {
+            loadSurveyResults : function () {}
         };
 
         groundsource.init();
@@ -22,7 +46,6 @@
     /**
      * @name $.fn.groundsource
      * @class
-     *
      *
      * @example
      * $('#widget').groundsource({

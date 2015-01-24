@@ -1,19 +1,15 @@
-
 module("groundsource", {
 });
 
 test("check groundsource instantiated", function() {
-    strictEqual ( typeof $.fn.groundsource !== 'undefined', true, 'groundsource defined' );
+    strictEqual ( typeof $.fn.groundsource !== 'undefined', true, '$.fn.groundsource defined' );
 });
 
 
-test("check groundsource instantiated", function() {
-    strictEqual ( true, true, 'true is true' );
+test("check window.groundsource instantiated", function() {
+    strictEqual ( typeof window.groundsource !== 'undefined', true, 'window.groundsource defined' );
 });
 
-// asyncTest("someAPIcall()", 18, function() {
-
-// });
-
-
-
+test("check merged settings", function() {
+    notEqual ( window.groundsource.main.settings.api_base_url, '', 'base url is overriden during init() to something other than empty string' );
+});
