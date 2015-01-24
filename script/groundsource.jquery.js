@@ -1,3 +1,8 @@
+/**
+ * @name groundsource.jquery.js
+ * @fileOverview
+ * @description main interface integrating jQuery and the GroundSource api
+ */
 (function ($) {
 
     'use strict';
@@ -47,10 +52,16 @@
      * @name $.fn.groundsource
      * @class
      *
+     * @description main integration point between jQuery, GroundSourceUI, and the GroundSource API
+     *
+     * @param {Object} args.settings object literal containing initial values to set on GroundSource initialization.
+     *
      * @example
      * $('#widget').groundsource({
-     *    settings : {
-     *    },
+     *     settings : {
+     *         api_base_url    : '',
+     *         token           : '',
+     *     }
      * });
      */
     $.fn.groundsource = function (args) {
