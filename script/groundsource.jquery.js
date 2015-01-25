@@ -47,7 +47,6 @@
 
     };  //end GroundSource
 
-
     /**
      * @name $.fn.groundsource
      * @class
