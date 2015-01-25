@@ -35,8 +35,11 @@
                 console.log('error [' + data.status + '] -- ' + data.responseJSON.detail);
             },
             handleSuccess: function (data) {
-                console.log('success! [' + data.status + ']');
+                console.log('success!');
                 console.log(data);
+            },
+            setAuthHeader : function (xhr) {
+                xhr.setRequestHeader('authorization', 'Bearer ' + groundsource.settings.token);
             },
             loadSurveyResults : function () {
                 $.ajax({
@@ -45,9 +48,7 @@
                   data: {},
                   success : groundsource.api.handleSuccess,
                   error : groundsource.api.handleError,
-                  beforeSend:function(xhr) {
-                    xhr.setRequestHeader('authorization', 'Bearer ' + groundsource.settings.token);
-                  }
+                  beforeSend: groundsource.api.setAuthHeader
                 });
             },
         };
