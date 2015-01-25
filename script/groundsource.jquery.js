@@ -19,14 +19,12 @@
         this.settings = {
             api_base_url    : '',   //defaults, will be merged + overridden on init()
             token           : '',
-            sandbox_mode    : true,
         };
 
         this.init = function () {
             if (groundsource.args.hasOwnProperty('settings')) {
                 groundsource.util.mergeSettings(groundsource.args.settings);
             }
-
             groundsource.api.loadSurveyResults();
         };
 
@@ -41,7 +39,7 @@
             setAuthHeader : function (xhr) {
                 xhr.setRequestHeader('authorization', 'Bearer ' + groundsource.settings.token);
             },
-            loadSurveyResults : function () {
+            loadSurveyResults : function (callback) {
                 $.ajax({
                   type: 'GET',
                   url: groundsource.settings.api_base_url + "/surveys/answeredsurvey/",
@@ -89,6 +87,13 @@
 
         var jq_element = this,  //hold reference to jQuery $(this)
             methods = {
+                loadSurveyResults : function (callback) {
+                    if (typeof window.groundsource !== 'undefined') {
+                        window.groundsource.api.loadSurveyResults(callback);
+                    } else {
+                        console.log('you must first initialize groundsource before calling methods on it.');
+                    }
+                },
             };
 
         if (methods[args]) {

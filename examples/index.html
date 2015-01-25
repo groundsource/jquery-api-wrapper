@@ -7,12 +7,21 @@
         <script type="text/javascript" src="../script/groundsource.jquery.js"></script>
 
         <script type="text/javascript">
+            var onready = function () {
+                $('#widget').groundsource('loadSurveyResults', function(data) {
+                    alert(data);
+                });
+            }
             $('#widget').groundsource({
                 settings : {
                     api_base_url    : 'https://groundsource-dev.herokuapp.com/api/v1',   //defaults, can be overridden on init()
                     token           : 'xRMx2kDixCl4jvxdVQU4GnEF6jeUFp',
+                },
+                onReady : function (groundsource) {
+                    alert(groundsource);
                 }
             });
+
         </script>
     </head>
     <body>
