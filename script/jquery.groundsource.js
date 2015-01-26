@@ -9,9 +9,10 @@
 
   /**
    * @options
-   * @param api_base_url [string] <''> "base url for api"
-   * @param access_token [string] <''> "access_token for api auth"
-   * @param cache [boolean] <'true'> "cache results"
+   * @name options
+   * @param api_base_url [string] "base url for api"
+   * @param access_token [string] "access_token for api auth"
+   * @param cache [boolean] "cache results"
    */
   var options = {
     api_base_url    : '',
@@ -31,7 +32,7 @@
      * @param opts [object] <{}> "Options object"
      * @example $.groundsource("defaults", opts);
      */
-    defaults: function(opts) {
+    defaults : function(opts) {
       options = $.extend(options, opts || {});
       return (typeof this === 'object') ? $(this) : true;
     },
@@ -40,8 +41,9 @@
      * @method
      * @name get
      * @description loads data via get
-     * @param api_method [url] <''> "api_method to get"
-     * @example $.groundsource("get", "/surveys/answeredsurvey/");
+     * @param api_method [url] "api_method to get"
+     * @param callback [function] "success callback function"
+     * @example $.groundsource("get", "/surveys/answeredsurvey/", function () {});
      */
     get : function(api_method, callback) {
       _request(api_method, callback);
@@ -63,8 +65,9 @@
   /**
    * @method private
    * @name _request
-   * @description Requests new content via AJAX
-   * @param url [string] "URL to load"
+   * @description Requests content via AJAX
+   * @param api_method [string] "api action to request"
+   * @param callback [function] "callback function"
    */
   function _request(api_method, callback) {
 
@@ -90,6 +93,29 @@
     });
   }
 
+  /**
+   * @name $.groundsource
+   * @class
+   *
+   * @description simple jquery-based integration interface to the GroundSource API
+   *
+   * @param {Object} settings object literal containing initial values to set on GroundSource initialization.
+   *
+   * @example
+   * basic init
+   * $.groundsource({
+   *     api_base_url    : 'https://groundsource.co/api/v1',
+   *     access_token    : 'xxxxx',
+   *
+   * });
+   * @example
+   * sample api call
+   * $.groundsource("get", "/surveys/answeredsurvey/", function (data) {
+   *     $.each(data.results, function (id, object) {
+   *         // do stuff
+   *    });
+   * });
+   */
   $.groundsource = function(method) {
     if (pub[method]) {
       return pub[method].apply(this,
