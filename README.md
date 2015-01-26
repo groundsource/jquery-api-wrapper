@@ -1,6 +1,6 @@
 # GroundSource jquery-api-wrapper
 
-a jquery.fn wrapper for the GroundSource API.
+a jquery wrapper for the GroundSource API.
 
 
 ### Project structure ###
@@ -21,7 +21,7 @@ a jquery.fn wrapper for the GroundSource API.
 #### generate docs ####
 
 		$ brew install jsdoc3
-		$ jsdoc script/* -d docss
+		$ jsdoc script/* -d docs
 
 #### run unit tests	####
 

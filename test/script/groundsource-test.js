@@ -2,14 +2,14 @@ module("groundsource", {
 });
 
 test("check groundsource instantiated", function() {
-    strictEqual ( typeof $.fn.groundsource !== 'undefined', true, '$.fn.groundsource defined' );
+    strictEqual ( typeof $.groundsource !== 'undefined', true, '$.groundsource defined' );
 });
 
+test( "basic get request", function( assert ) {
+  var done = assert.async();
 
-test("check window.groundsource instantiated", function() {
-    strictEqual ( typeof window.groundsource !== 'undefined', true, 'window.groundsource defined' );
-});
-
-test("check merged settings", function() {
-    notEqual ( window.groundsource.main.settings.api_base_url, '', 'base url is overriden during init() to something other than empty string' );
+  $.groundsource("get", "/", function (data) {
+    assert.equal( true, ('sources' in data), "api base returns map, including sources" );
+    done();
+  });
 });
